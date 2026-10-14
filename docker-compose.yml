@@ -1,0 +1,18 @@
+name: venner
+
+services:
+  venner:
+    build: .
+    image: venner:latest
+    ports:
+      - "${PORT:-8765}:${PORT:-8765}"
+    environment:
+      PORT: ${PORT:-8765}
+      ADMIN_USER: ${ADMIN_USER:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+    volumes:
+      - venner-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  venner-data:

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Venner — friend reminders</title>
+<meta name="description" content="Venner reminds you to call your close friends and keep distance from the rest.">
+<meta name="theme-color" content="#FFC400">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/svg+xml" href="/icons/icon.svg">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<!-- Login -->
+<section id="view-login" class="login-wrap" hidden>
+  <div class="login-card">
+    <div class="login-side">
+      <div class="brand"><span class="sun" aria-hidden="true"></span><span class="brand-name">Venner</span></div>
+      <h1>Remember the people who matter.</h1>
+      <ul class="login-points">
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5 8 15.5 17 4.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Weekly nudges to call your close friends</li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5 8 15.5 17 4.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Birthday alerts from your calendar</li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5 8 15.5 17 4.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Stay-away reminders for your cutoff list</li>
+      </ul>
+      <p class="login-note">Invite-only: your admin creates your account and hands you a temporary password.</p>
+    </div>
+    <div class="login-form">
+      <h2>Sign in</h2>
+      <form id="form-login">
+        <label>Username<input id="login-user" name="username" autocomplete="username" required></label>
+        <label>Password<input id="login-pass" name="password" type="password" autocomplete="current-password" required></label>
+        <p class="form-error" id="login-error" role="alert"></p>
+        <button class="btn primary" type="submit">Sign in</button>
+      </form>
+      <p class="login-hint">First login uses a temporary password — you will pick your own next.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Forced password change -->
+<section id="view-change" class="login-wrap" hidden>
+  <div class="login-card narrow">
+    <div class="login-form">
+      <h2>Pick your own password</h2>
+      <p class="muted">You signed in with a temporary password. Choose a new one to continue.</p>
+      <form id="form-change">
+        <label>New password (8+ characters)<input id="change-new" type="password" autocomplete="new-password" required minlength="8"></label>
+        <label>Repeat new password<input id="change-repeat" type="password" autocomplete="new-password" required minlength="8"></label>
+        <p class="form-error" id="change-error" role="alert"></p>
+        <button class="btn primary" type="submit">Save password</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- App -->
+<div id="app" hidden>
+  <header class="topbar">
+    <div class="brand small"><span class="sun" aria-hidden="true"></span><span class="brand-name">Venner</span></div>
+    <div class="topbar-right">
+      <span id="user-chip" class="user-chip"></span>
+      <button id="btn-logout" class="btn ghost">Sign out</button>
+    </div>
+  </header>
+  <div class="layout">
+    <nav class="sidebar" aria-label="Main">
+      <button data-tab="reminders" class="nav-item">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2a6 6 0 0 0-6 6v3l-1.6 2.7c-.3.5.1 1.3.8 1.3H17.8c.7 0 1.1-.8.8-1.3L17 11V8a6 6 0 0 0-6-6Zm-2.5 16a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Reminders <span class="badge" id="badge-reminders" hidden></span>
+      </button>
+      <button data-tab="friends" class="nav-item">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="7" cy="7" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M1.5 17c.6-3 2.9-4.6 5.5-4.6s4.9 1.6 5.5 4.6M13.5 4.4a3.2 3.2 0 0 1 0 5.9M15.8 12.7c1.6.7 2.5 2 2.8 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Friends
+      </button>
+      <button data-tab="categories" class="nav-item">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 3h7l9 9-7 7-9-9V3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8" cy="8" r="1.4" fill="currentColor"/></svg>
+        Lists &amp; policies
+      </button>
+      <button data-tab="imports" class="nav-item">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2v11m0-11L5.5 6.5M10 2l4.5 4.5M3 13v4a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Imports
+      </button>
+      <button data-tab="merge" class="nav-item">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="5.5" cy="5.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="5.5" cy="14.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="14.5" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M7.8 6.4 12 8.6M7.8 13.6 12 11.4" stroke="currentColor" stroke-width="1.8"/></svg>
+        Merge review <span class="badge" id="badge-merge" hidden></span>
+      </button>
+      <button data-tab="admin" class="nav-item" id="nav-admin" hidden>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2 3 5v6c0 4.4 3 7.4 7 9 4-1.6 7-4.6 7-9V5l-7-3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 10l2 2 4-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Admin
+      </button>
+    </nav>
+    <main id="main">
+      <section id="tab-reminders" class="tab" hidden></section>
+      <section id="tab-friends" class="tab" hidden></section>
+      <section id="tab-categories" class="tab" hidden></section>
+      <section id="tab-imports" class="tab" hidden></section>
+      <section id="tab-merge" class="tab" hidden></section>
+      <section id="tab-admin" class="tab" hidden></section>
+    </main>
+  </div>
+</div>
+
+<div id="modal-root"></div>
+<div id="toasts" aria-live="polite"></div>
+<script src="/app.js"></script>
+</body>
+</html>

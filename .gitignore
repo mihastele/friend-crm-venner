@@ -1,0 +1,30 @@
+# Venner runtime data (created on first run, never commit)
+venner.db*
+.venner_secret
+
+# Local environment: copy .env.example to .env and keep secrets out of git
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Editors & OS
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

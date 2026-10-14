@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.venv/
+venner.db
+.venner_secret
+tests/
+.git/
+.env

@@ -1,0 +1,19 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Nordmann;Kari;;;
+FN:Kari Nordmann
+TEL;TYPE=CELL:+47 911 22 333
+EMAIL:kari@example.com
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+N:Berg;Jonas;;;
+FN:Jonas Berg
+TEL;TYPE=CELL:+47 900 11 222
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+N:Vik;Ola;;;
+FN:Ola Vik
+EMAIL:ola@example.com
+END:VCARD
